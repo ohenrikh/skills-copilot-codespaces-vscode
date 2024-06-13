@@ -1,7 +1,7 @@
 #!/bin/bash
 # Usage: ./test.sh "Hvilken diagnose har Erik Hansen?"
 
-#$API_KEY and $SEARCH_KEY are codespace secrets
+#$API_KEY  = $KEYOPENAI and $SEARCH_KEY = $KEYKODEFESTAPI are codespace secrets
 api_base="https://norwayeast.api.cognitive.microsoft.com"
 deployment_id="test1"
 search_endpoint="https://ai-search-kodefest.search.windows.net"
@@ -16,7 +16,7 @@ fi
 
 curl -i -X POST $api_base/openai/deployments/$deployment_id/chat/completions?api-version=2024-02-15-preview \
   -H "Content-Type: application/json" \
-  -H "api-key: $API_KEY" \
+  -H "api-key: $KEYOPENAI" \
   -d \
 '{
   "data_sources": [
@@ -34,8 +34,8 @@ curl -i -X POST $api_base/openai/deployments/$deployment_id/chat/completions?api
         "strictness": 3,
         "top_n_documents": 5,
         "authentication": {
-          "type": "api_key",
-          "key": "'$SEARCH_KEY'"
+          "type": "KEYOPENAI",
+          "key": "'$KEYKODEFESTAPI'"
         }
       }
     }
